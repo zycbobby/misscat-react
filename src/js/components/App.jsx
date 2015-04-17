@@ -1,63 +1,53 @@
-const React = require('react');
+import React from 'react';
 const TodoStore = require('../stores/TodoStore');
 const ActionCreator = require('../actions/TodoActionCreators');
-const TaskList = require('./TaskList.jsx');
-const mui = require('material-ui');
+import mui from 'material-ui';
 
-import Hello from './Hello.jsx';
+let {RaisedButton, AppCanvas, AppBar, IconButton, Menu} = mui;
+import MyLeftNav from './MyLeftNav.jsx';
+import Router from 'react-router';
 
-let {RaisedButton} = mui;
+let {RouteHandler} = Router;
 
 let App = React.createClass({
 
-  getInitialState() {
-    return {
-      tasks: []
-    }
-  },
-
-  _onChange() {
-    this.setState(TodoStore.getAll());
-  },
-
-  componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
-  },
-
-  handleAddNewClick(e) {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
-
-  handleClearListClick(e) {
-    ActionCreator.clearList();
-  },
+  mixins: [Router.State],
 
   render() {
-    let {tasks} = this.state;
-    return (
-      <div className="example-page">
-        <h1>Learning Flux</h1>
-        <p>
-          Below is a list of tasks you can implement to better grasp the patterns behind Flux.<br />
-          Most features are left unimplemented with clues to guide you on the learning process.
-        </p>
 
-        <TaskList tasks={tasks} />
+    let title =
+      this.context.router.isActive('login') ? 'Login' :
+        this.context.router.isActive('main') ? 'Main' :
+          this.context.router.isActive('recent') ? 'Recent' : '';
 
-        <RaisedButton label="Add Task" primary={true} onClick={this.handleAddNewClick} />
-        <RaisedButton label="Clear List" secondary={true} onClick={this.handleClearListClick} />
-        <Hello />
-      </div>
+    let githubButton = (
+      <IconButton
+        iconClassName="muidocs-icon-custom-github"
+        href="https://github.com/callemall/material-ui"
+        linkButton={true} />
     );
+
+    return (
+      <AppCanvas>
+        <AppBar
+          onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+          title={title}
+          zDepth={0}>
+          {githubButton}
+        </AppBar>
+
+        <MyLeftNav ref="leftNav" />
+
+        <RouteHandler />
+
+      </AppCanvas>
+    );
+  },
+
+  _onMenuIconButtonTouchTap: function() {
+    this.refs.leftNav.toggle();
   }
 
 });
 
-module.exports = App;
+export default App;
