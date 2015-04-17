@@ -20,20 +20,12 @@ let App = React.createClass({
         this.context.router.isActive('main') ? 'Main' :
           this.context.router.isActive('recent') ? 'Recent' : '';
 
-    let githubButton = (
-      <IconButton
-        iconClassName="muidocs-icon-custom-github"
-        href="https://github.com/callemall/material-ui"
-        linkButton={true} />
-    );
-
     return (
       <AppCanvas>
         <AppBar
           onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}
           title={title}
           zDepth={0}>
-          {githubButton}
         </AppBar>
 
         <MyLeftNav ref="leftNav" />
