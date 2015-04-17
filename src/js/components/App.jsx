@@ -4,6 +4,8 @@ const ActionCreator = require('../actions/TodoActionCreators');
 const TaskList = require('./TaskList.jsx');
 const mui = require('material-ui');
 
+import Hello from './Hello.jsx';
+
 let {RaisedButton} = mui;
 
 let App = React.createClass({
@@ -51,6 +53,7 @@ let App = React.createClass({
 
         <RaisedButton label="Add Task" primary={true} onClick={this.handleAddNewClick} />
         <RaisedButton label="Clear List" secondary={true} onClick={this.handleClearListClick} />
+        <Hello />
       </div>
     );
   }
