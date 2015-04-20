@@ -45,7 +45,7 @@ let Login = React.createClass({
 
   render() {
     return (
-    <div className="get-started-page mui-app-content-canvas">
+    <div className="mui-app-content-canvas">
       <div className="full-width-section">
         <Description />
 

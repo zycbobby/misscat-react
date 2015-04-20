@@ -1,15 +1,27 @@
+@import "../../../node_modules/material-ui-sass/material-ui";
+
 $max-width : 650px;
 $form-margin : 25px;
 
-.get-started-page {
-  .full-width-section {
-    max-width: $max-width;
-    margin: 0 auto;
+.full-width-section {
+  max-width: $max-width;
+  margin: 0 auto;
 
-    .form-item {
-      width: 100%;
-      margin-top: 24px;
-    }
+  .form-item {
+    width: 100%;
+    margin-top: 24px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .form-textarea {
+    height: 250px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 5px 5px 5px 5px;
+    resize : none;
+
+    background-color: $grey-900;
+    color: $green-A400;
   }
 }
 

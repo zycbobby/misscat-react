@@ -1,7 +1,12 @@
 var gulp = require('gulp');
-var connect = require('gulp-connect');
-var config = require('../config').watch;
+
+var livereloadConfig = require('../config').livereload;
+var livereload = require('gulp-livereload');
 
 gulp.task('build', ['browserify', 'styles', 'html'], function() {
-  gulp.src(config.src).pipe(connect.reload());
+  gulp.src(livereloadConfig.src).pipe(livereload({
+    port : livereloadConfig.port,
+    host : livereloadConfig.host,
+    basePath : livereloadConfig.basePath
+  }));
 });

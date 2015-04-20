@@ -3,15 +3,12 @@ var src = './src';
 var gutil = require('gulp-util');
 
 module.exports = {
-  server: {
-    settings: {
-      root: dest,
-      host: 'localhost',
-      port: 8080,
-      livereload: {
-        port: 35929
-      }
-    }
+
+  livereload : {
+    src : src,
+    port: 35729,
+    basePath : dest,
+    host: 'localhost'
   },
   sass: {
     src: src + '/styles/**/*.{sass,scss,css}',
@@ -37,5 +34,11 @@ module.exports = {
   watch: {
     src: 'src/**/*.*',
     tasks: ['build']
+  },
+
+  nodeserver: {
+    entry : 'server/app.js',
+    src: 'server/**/*.*'
   }
+
 };
