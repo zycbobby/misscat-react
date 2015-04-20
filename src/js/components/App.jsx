@@ -25,7 +25,7 @@ let App = React.createClass({
         <AppBar
           onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}
           title={title}
-          zDepth={0}>
+          zDepth={1}>
         </AppBar>
 
         <MyLeftNav ref="leftNav" />

@@ -10,10 +10,7 @@ let Description = React.createClass({
 
   render() {
     return (
-      <div>
-        <p>Here is some description</p>
-      </div>
-
+        <h2 className="mui-font-style-title">Here is some description</h2>
     );
   }
 });

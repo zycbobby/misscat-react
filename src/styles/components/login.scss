@@ -1,5 +1,16 @@
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+$max-width : 650px;
+$form-margin : 25px;
 
-.login-btn {
-  width: $screen-md / $grid-columns;
+.get-started-page {
+  .full-width-section {
+    max-width: $max-width;
+    margin: 0 auto;
+
+    .form-item {
+      width: 100%;
+      margin-top: 24px;
+    }
+  }
 }
+
+

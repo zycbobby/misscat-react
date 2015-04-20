@@ -1,41 +1,81 @@
 import React from 'react';
 import mui from 'material-ui';
-import rb from 'react-bootstrap';
+import Router from 'react-router';
+import Description from './Description.jsx';
+import LoginAction from '../actions/LoginActionCreator.js';
+import LoginStore from '../stores/LoginStore.js';
 
-let {Grid, Col, Row} = rb;
-
-import Description from './Description.jsx'
+let {TextField, RaisedButton, Snackbar} = mui;
 
 let Login = React.createClass({
+
+  mixins: [Router.State],
+
   getInitialState() {
-    return {};
+    return {
+
+    };
   },
 
   componentDidMount() {
+    LoginStore.addChangeListener(this._onLogin);
+  },
+
+  componentWillUnmount() {
+    LoginStore.removeChangeListener(this._onLogin);
+  },
+
+  _login(e) {
+    e.preventDefault();
+    LoginAction.updateLogin({
+      userName : '',
+      password : this.refs.pwd.getValue()
+    });
+  },
+
+  _onLogin() {
+    if (LoginStore.getLoginState().isLogin) {
+      this.refs.pwd.setErrorText("");
+      this.context.router.transitionTo('main', {}, {target: this.context.router.getCurrentQuery().target});
+    } else {
+      this.refs.loginError.show();
+      this.refs.pwd.setErrorText("Password is not correct");
+    }
   },
 
   render() {
     return (
-      <div>
-        <Grid>
-          <Row className='show-grid'>
-            <Col xs={12} md={8}>
-              <Description />
-            </Col>
-            <Col xs={6} md={4}>
-              <Row>
-                <mui.TextField
-                  disabled={true}
-                  defaultValue="LukiWu" />
-                <mui.TextField floatingLabelText="Password"/>
-              </Row>
-              <Row pullRight>
-                <mui.RaisedButton label="Login" secondary={true} className="login-btn"/>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+    <div className="get-started-page mui-app-content-canvas">
+      <div className="full-width-section">
+        <Description />
+
+        <form>
+          <TextField
+            className="form-item"
+            hintText="Disabled Hint Text"
+            disabled={true}
+            floatingLabelText="LukiWu" />
+
+          <TextField
+            ref="pwd"
+            type="password"
+            className="form-item"
+            hintText="Please enter password"
+            floatingLabelText="Password" />
+
+          <RaisedButton
+            className="form-item"
+            label="Login"
+            secondary={true}
+            onClick={this._login} ></RaisedButton>
+        </form>
+
+        <Snackbar
+          ref="loginError"
+          message="Fail to login"/>
+
       </div>
+    </div>
     );
   }
 });
