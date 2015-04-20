@@ -4,6 +4,13 @@ import Router from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+// jquery
+import jquery from 'jquery';
+global.jquery = jquery;
+global.jQuery = global.jquery;
+global.$ = global.jQuery;
+
+
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
 import Main from './components/Main.jsx';

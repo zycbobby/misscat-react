@@ -48,11 +48,9 @@ let Login = React.createClass({
     <div className="mui-app-content-canvas">
       <div className="full-width-section">
         <Description />
-
         <form>
           <TextField
             className="form-item"
-            hintText="Disabled Hint Text"
             disabled={true}
             floatingLabelText="LukiWu" />
 

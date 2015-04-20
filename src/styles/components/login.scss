@@ -6,6 +6,7 @@ $form-margin : 25px;
 .full-width-section {
   max-width: $max-width;
   margin: 0 auto;
+  position: relative;
 
   .form-item {
     width: 100%;
@@ -14,12 +15,17 @@ $form-margin : 25px;
     margin-right: 5px;
   }
 
+
+  .submit-btn {
+    position: absolute;
+    right: 0;
+  }
+
   .form-textarea {
-    height: 250px;
+    height: 100px;
     padding: 10px 10px 10px 10px;
     border-radius: 5px 5px 5px 5px;
     resize : none;
-
     background-color: $grey-900;
     color: $green-A400;
   }

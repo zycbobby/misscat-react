@@ -5,6 +5,11 @@ module.exports = {
   ActionTypes: keyMirror({
     ADD_TASK: null,
     LOGIN: null
+
+  }),
+
+  BlogActionTypes : keyMirror({
+    RECEIVE_ALL_BLOGS : null
   }),
 
   ActionSources: keyMirror({
