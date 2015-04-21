@@ -6,8 +6,8 @@ import Comment from './Comment.jsx';
 import Blog from './Blog.jsx';
 
 import LoginStore from '../stores/LoginStore.js';
+import BlogAction from '../actions/BlogActionCreator.js';
 import BlogStore  from  '../stores/BlogStore.js';
-import BlogUtil from '../utils/BlogApiUtil.js';
 
 
 let {TextField} = mui;
@@ -31,29 +31,35 @@ let Main = React.createClass({
 
   componentDidMount() {
     BlogStore.addChangeListener(this._onChange);
-    BlogUtil.getAllBlogs(msg=> { console.log(msg)});
 
+    // initialize data
+    BlogAction.receiveAll(msg=> { console.log(msg)});
   },
 
   componentWillUnmount() {
-    Blog.removeChangeListener(this._onChange);
+    BlogStore.removeChangeListener(this._onChange);
   },
 
   _onChange() {
     let { blogs } = BlogStore.getAll();
-    console.log(blogs);
     this.blogs = blogs;
     this.setState({});
+  },
+
+  _sendNewBlog(blog, cb) {
+    BlogAction
+      .sendNewBlog(blog, msg=> { console.log(msg)})
+      .done(cb);
   },
 
   render() {
     return (
       <div className="mui-app-content-canvas">
         <div className="full-width-section">
-          <Comment></Comment>
+          <Comment onSubmit={this._sendNewBlog}></Comment>
         </div>
         <ul>
-           {this.blogs.map(blog => <Blog blog={blog}> </Blog>)}
+           {this.blogs.map((blog,i) => <Blog key={i} blog={blog}> </Blog>)}
         </ul>
 
     </div>

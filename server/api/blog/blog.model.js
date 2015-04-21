@@ -14,12 +14,18 @@ var BlogSchema = new Schema({
     type : String // jpeg or png
   }],
   type : Number,
-  createdAt : Date
+  createdAt : Date,
+  updatedAt : Date
 });
 
 
 BlogSchema.pre('save', function (next) {
-  this.createdAt = Date.now();
+  if (this.isNew) {
+    this.createdAt = Date.now();
+  } else {
+    this.updatedAt = Date.now();
+  }
+
   next();
 });
 

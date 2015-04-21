@@ -6,21 +6,33 @@ let {TextField, RaisedButton, Snackbar} = mui;
 
 let Comment = React.createClass({
   getInitialState() {
-    return {};
+    return {
+
+    };
   },
 
   componentDidMount() {
   },
 
-  render() {
-    let style = {
-      paddingBottom : '50px'
-    };
+  _onClick(e) {
+    let commentContent = this.refs.commentContent.getDOMNode().value;
+    let that = this;
+    if (this.props.onSubmit) {
+      this.props.onSubmit({
+        text : commentContent,
+        images : []
+      }, function(){
+        that.refs.commentContent.getDOMNode().value = "";
+      });
+    }
+  },
 
+  render() {
     return (
-      <div style={style}>
-        <textarea className="form-item form-textarea mui-font-style-body-2" ></textarea>
-        <RaisedButton className="submit-btn" label="Submit" secondary={true}></RaisedButton>
+
+      <div className="full-width-section full-width-section-with-submit-btn" >
+        <textarea ref="commentContent" className="form-item-fullwidth mui-font-style-body-2" ></textarea>
+        <RaisedButton className="form-item-right" label="Submit" secondary={true} onClick={this._onClick}></RaisedButton>
       </div>
     );
   }

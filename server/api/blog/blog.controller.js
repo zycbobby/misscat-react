@@ -5,10 +5,14 @@ var Blog = require('./blog.model');
 
 // Get list of blogs
 exports.index = function(req, res) {
-  Blog.find(function (err, blogs) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, blogs);
-  });
+  Blog.find()
+    .sort({
+      createdAt : -1
+    })
+    .exec(function (err, blogs) {
+      if(err) { return handleError(res, err); }
+      return res.json(200, blogs);
+    });
 };
 
 // Get a single blog
@@ -48,6 +52,18 @@ exports.destroy = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!blog) { return res.send(404); }
     blog.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
+  });
+};
+
+exports.comment = function(req, res) {
+  Blog.findById(req.params.id, function (err, blog) {
+    if(err) { return handleError(res, err); }
+    if(!blog) { return res.send(404); }
+    blog.comments.push(req.body);
+    blog.save(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });
