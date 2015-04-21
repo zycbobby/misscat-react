@@ -9,14 +9,13 @@ import LoginStore from '../stores/LoginStore.js';
 import BlogAction from '../actions/BlogActionCreator.js';
 import BlogStore  from  '../stores/BlogStore.js';
 
-
 let {TextField} = mui;
 
 let Main = React.createClass({
 
   blogs : [],
 
-  mixins: [Router.State],
+  mixins: [Router.State, ],
 
   getInitialState() {
     return {};
@@ -25,7 +24,7 @@ let Main = React.createClass({
   componentWillMount() {
     if (!LoginStore.getLoginState().isLogin) {
       // disable this line for debug now
-      // this.context.router.transitionTo('login', {}, {target: this.context.router.getCurrentQuery().target});
+      this.context.router.transitionTo('login', {}, {target: this.context.router.getCurrentQuery().target});
     }
   },
 

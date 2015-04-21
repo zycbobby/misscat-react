@@ -47,5 +47,20 @@ module.exports = {
     }).done(function(){
       that.receiveAll(fail);
     });
+  },
+
+  getRecentComments : function(fail) {
+    return $.ajax({
+      url : '/api/blogs/comments',
+      type : 'GET',
+      dataType: 'json'
+    }).fail(xhr => {
+      Utils.handleFail(xhr, fail);
+    }).done(function(comments){
+      AppDispatcher.handleViewAction({
+        type: Constants.BlogActionTypes.RECEIVE_ALL_COMMENTS,
+        comments : comments
+      });
+    });
   }
 };

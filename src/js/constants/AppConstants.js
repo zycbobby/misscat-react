@@ -10,7 +10,8 @@ module.exports = {
 
   BlogActionTypes : keyMirror({
     RECEIVE_ALL_BLOGS : null,
-    SEND_NEW_BLOG : null
+    SEND_NEW_BLOG : null,
+    RECEIVE_ALL_COMMENTS: null
   }),
 
   ActionSources: keyMirror({

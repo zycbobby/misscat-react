@@ -70,6 +70,22 @@ exports.comment = function(req, res) {
   });
 };
 
+exports.showComment = function(req, res) {
+  Blog.aggregate({
+      $unwind : '$comments'
+    }, {
+      $project : { comments : '$comments', "_id" : 0}
+    }, {
+      $sort : {
+        "comments.createdAt" : -1
+      }
+    }, function(err, result) {
+
+    if(err) { return handleError(res, err); }
+    return res.send(200, result);
+  });
+};
+
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.send(200, err);
 }
