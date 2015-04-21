@@ -20,7 +20,7 @@ var BlogSchema = new Schema({
 
 
 BlogSchema.pre('save', function (next) {
-  if (this.isNew) {
+  if (this.isNew && !this.createdAt) {
     this.createdAt = Date.now();
   } else {
     this.updatedAt = Date.now();

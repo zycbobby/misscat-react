@@ -41,6 +41,10 @@ var all = {
     }
   },
 
+  csv_blog : path.join(__dirname, '/../../../old_data/blog_text.csv'),
+  csv_comment : path.join(__dirname, '/../../../old_data/blog_comment.csv'),
+
+
   google: {
     clientID:     process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',

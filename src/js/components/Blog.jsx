@@ -62,13 +62,17 @@ let Blog = React.createClass({
 
   },
 
+  _replyLabel() {
+    return 'Reply(' + this.props.blog.comments.length + ')';
+  },
+
   render() {
     return (
       <div className="full-width-section">
         <Paper className="blog-paper" zDepth={0}>
             {this.DateComponent(this.props.blog.createdAt)}
             <div className="mui-font-style-title">{this.props.blog.text}</div>
-            <FlatButton label="Reply" className="mui-font-style-caption form-item-right" onClick={this._ToggleComments}></FlatButton>
+            <FlatButton label={this._replyLabel()} className="mui-font-style-caption form-item-right" onClick={this._ToggleComments}></FlatButton>
             {this._listCommentComponent()}
         </Paper>
       </div>

@@ -18,13 +18,6 @@ module.exports = {
     uri: process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME ||
-    'mongodb://localhost/misscat'
-  },
-
-
-
-  itemCron: process.env.ITEM_CRON || '0 */5 9-23 * * *',
-  thingCron: process.env.THING_CRON || '0 */20 9-23 * * *',
-  timeZone: 'Asia/Shanghai',
-  esCron : '0 0 0-8 * * *'
+    'mongodb://misscatandzuozuo.info:16888/misscat'
+  }
 };
