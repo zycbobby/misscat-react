@@ -36,8 +36,6 @@ csv.fromPath(config.csv_blog, {
       createdAt : data[3]
     });
   }).on("end", function() {
-
-
     var blogArray = [];
     for(var key in blogs) {
       blogArray.push(blogs[key]);
@@ -46,6 +44,7 @@ csv.fromPath(config.csv_blog, {
       Blog.create(blog, cb);
     }, function(err) {
       console.log(err);
+      process.exit();
     });
 
   });
